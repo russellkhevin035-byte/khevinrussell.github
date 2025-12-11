@@ -6,11 +6,65 @@
     <title>Khevin Russell - Contact Me</title>
     <link rel="stylesheet" href="styles.css">
 
-</head>
-<body>
-   <nav>
-    <div class="container">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
+    <style>
+
+        .rating-display {
+    margin-top: 15px;
+    margin-bottom: 40px !important;  /* <-- This creates space before the footer */
+    font-size: 14px;
+    color: #ccc;
+}
+
+        /* ⭐ STAR RATING STYLES */
+        .rating-label {
+            margin-top: 10px;
+            margin-bottom: 6px;
+            display: block;
+            font-weight: 600;
+            color: #ffa347;
+        }
+
+        .rating {
+            display: flex;
+            gap: 6px;
+            justify-content: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .rating span {
+            font-size: 32px;
+            cursor: pointer;
+            transition: transform .2s ease, color .2s ease;
+            color: #555;
+        }
+
+        .rating span:hover {
+            transform: scale(1.25);
+            color: orange;
+        }
+
+        .rating span.active {
+            color: #ffa347;
+            text-shadow: 0 0 8px rgba(255,165,0,0.7);
+        }
+
+        /* ⭐ Firebase rating display */
+        .rating-display {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #ccc;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+    <div class="container">
         <div class="logo">Khevin<span>.dev</span></div>
 
         <ul>
@@ -19,35 +73,38 @@
             <li><a href="projects.html">Projects</a></li>
             <li><a href="contact.html">Contact Me</a></li>
         </ul>
-
     </div>
 </nav>
 
 
-    <section class="contact-section">
-    <div class="contact-container">
+<!-- CONTACT SECTION -->
+<section class="contact-section">
+<div class="contact-container">
 
-        <!-- LEFT SIDE -->
-        <div class="contact-left fade-up">
-            <h2 class="contact-title">Get In Touch</h2>
-            <div class="orange-line"></div>
+    <!-- LEFT SIDE -->
+    <div class="contact-left fade-up">
+        
+        <h2 class="contact-title">Get In Touch</h2>
+        <div class="orange-line"></div>
 
-            <h3 class="contact-subtitle">Let’s work together!</h3>
-            <p class="contact-desc">
-                I'm always interested in new opportunities and exciting projects.
-                Whether you have a question or just want to say hi, feel free to reach out!
-            </p>
+        <h3 class="contact-subtitle">Let’s work together!</h3>
+        <p class="contact-desc">
+            I'm always interested in new opportunities and exciting projects.
+            Whether you have a question or just want to say hi, feel free to reach out!
+        </p>
 
-            <div class="contact-info">
-                <p><i class="fas fa-envelope"></i>russellkhevin035@gmail.com</p>
-                <p><i class="fas fa-phone"></i> +639648787265</p>
-                <p><i class="fas fa-map-marker-alt"></i> Philippines, Angeles City, Pambanga, Amsic Purok 1</p>
-            </div>
+        <div class="contact-info">
+            <p><i class="fas fa-envelope"></i> russellkhevin035@gmail.com</p>
+            <p><i class="fas fa-phone"></i> +639648787265</p>
+            <p><i class="fas fa-map-marker-alt"></i> Philippines, Angeles City, Pampanga, Amsic Purok 1</p>
+        </div>
 
-            <div class="contact-socials">
-                <footer>
-        <div class="container footer-container">
+        <div class="rating-display">
+            ⭐ <span id="avgRating">0.0</span> / 5  
+            • <span id="totalRatings">0</span> ratings
+        </div>
 
+        <div class="contact-socials">
             <div class="social-links">
                 <a href="https://github.com/russellkhevin035-byte" target="_blank" class="icon-container">
                     <i class="fa-brands fa-github"></i>
@@ -68,73 +125,167 @@
 
             <p>&copy; 2025 Khevin Russell. All rights reserved.</p>
         </div>
-    </footer>
+    </div>
 
-    <!-- Font Awesome Icons (required for brands) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-            </div>
+    <!-- RIGHT SIDE FORM -->
+    <form id="contactForm" class="contact-form">
+
+        <div class="form-group">
+            <input type="text" name="name" placeholder="Your Name" required>
         </div>
 
-        <!-- RIGHT SIDE FORM -->
-        <form id="contactForm" class="contact-form">
-    <div class="form-group">
-        <input type="text" name="name" placeholder="Your Name" required>
-    </div>
-
-    <div class="form-group">
-        <input type="email" name="email" placeholder="Your Email" required>
-    </div>
-
-    <div class="form-group">
-        <input type="text" name="subject" placeholder="Subject" required>
-    </div>
-
-    <div class="form-group">
-        <textarea name="message" placeholder="Your Message" required></textarea>
-    </div>
-
-    <button type="submit" class="send-btn">Send Message</button>
-
-    <p id="successMsg" class="success-msg">Thank you for contacting me!</p>
-</form>
-
-
-
+        <div class="form-group">
+            <input type="email" name="email" placeholder="Your Email" required>
         </div>
 
+        <div class="form-group">
+            <input type="text" name="subject" placeholder="Subject" required>
+        </div>
+
+        <div class="form-group">
+            <textarea name="message" placeholder="Your Message" required></textarea>
+        </div>
+        <div class="rating-block">
+    <label class="rating-label">Rate My Portfolio</label>
+
+    <div class="rating" id="ratingStars">
+        <span data-value="5">★</span>
+        <span data-value="4">★</span>
+        <span data-value="3">★</span>
+        <span data-value="2">★</span>
+        <span data-value="1">★</span>
     </div>
+</div>
+
+
+        <!-- Hidden field for Formspree -->
+        <input type="hidden" name="rating" id="ratingInput" value="">
+
+        <button type="submit" class="send-btn">Send Message</button>
+
+        <p id="successMsg" class="success-msg">Thank you for contacting me!</p>
+
+    </form>
+
+</div>
 </section>
 
-<!-- your contact form HTML goes here -->
 
-<!-- put the script RIGHT BEFORE the closing body tag -->
-<script>
-document.getElementById("contactForm").addEventListener("submit", async function(e) {
-    e.preventDefault(); // STOP redirect
+
+<!-- ⭐ FIREBASE + STAR SYSTEM + FORMSPREE SCRIPT ⭐ -->
+<script type="module">
+
+/* ---------------------------------------------
+     ⭐ FIREBASE CONFIG 
+---------------------------------------------- */
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+import { getFirestore, collection, addDoc, getDocs } 
+from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAN1iAGK4EPWZ82WKiuWTNvZYFxxszJW88",
+  authDomain: "starrating-b6c33.firebaseapp.com",
+  projectId: "starrating-b6c33",
+  storageBucket: "starrating-b6c33.firebasestorage.app",
+  messagingSenderId: "585139648598",
+  appId: "1:585139648598:web:8e483379fed557602623f7",
+  measurementId: "G-ZLYQ2BW6TK"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+
+/* ---------------------------------------------
+     ⭐ STAR RATING CLICK LOGIC
+---------------------------------------------- */
+const stars = document.querySelectorAll("#ratingStars span");
+const ratingInput = document.getElementById("ratingInput");
+
+stars.forEach(star => {
+    star.addEventListener("mouseenter", () => {
+        const value = star.dataset.value;
+        stars.forEach(s => s.style.color = (s.dataset.value <= value ? "orange" : "#555"));
+    });
+
+    star.addEventListener("mouseleave", () => {
+        stars.forEach(s => s.style.color = s.classList.contains("active") ? "#ffa347" : "#555");
+    });
+
+    star.addEventListener("click", () => {
+        const value = star.dataset.value;
+        ratingInput.value = value;
+
+        stars.forEach(s => s.classList.remove("active"));
+        stars.forEach(s => {
+            if (s.dataset.value <= value) s.classList.add("active");
+        });
+    });
+});
+
+
+/* ---------------------------------------------
+     ⭐ SUBMIT FORM → SEND TO FORMSPREE + SAVE RATING TO FIREBASE
+---------------------------------------------- */
+document.getElementById("contactForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
 
     const form = e.target;
     const successMsg = document.getElementById("successMsg");
+    const ratingValue = ratingInput.value;
+
     const data = new FormData(form);
 
-    // Send form to Formspree manually in background
-    const res = await fetch("https://formspree.io/f/xyzrbkvb", {
+    // 👉 Send message to Formspree
+    await fetch("https://formspree.io/f/xyzrbkvb", {
         method: "POST",
         body: data,
         headers: { "Accept": "application/json" }
     });
 
-    if (res.ok) {
-        successMsg.style.display = "block"; // show green message
-        form.reset();
+    // 👉 Save rating to Firebase Firestore
+    if (ratingValue !== "") {
+        await addDoc(collection(db, "ratings"), {
+            rating: parseInt(ratingValue),
+            timestamp: Date.now()
+        });
     }
+
+    // 🎉 Show success message
+    successMsg.style.display = "block";
+    form.reset();
+
+    // Remove highlighted stars
+    stars.forEach(s => s.classList.remove("active"));
+
+    loadRatingStats();
 });
+
+
+/* ---------------------------------------------
+     ⭐ LOAD AVERAGE RATING
+---------------------------------------------- */
+async function loadRatingStats() {
+    const snapshot = await getDocs(collection(db, "ratings"));
+
+    let total = 0;
+    let count = 0;
+
+    snapshot.forEach(doc => {
+        total += doc.data().rating;
+        count++;
+    });
+
+    const avg = count ? (total / count).toFixed(1) : "0.0";
+
+    document.getElementById("avgRating").innerText = avg;
+    document.getElementById("totalRatings").innerText = count;
+}
+
+loadRatingStats();
+
 </script>
 
-</body>
-</html>
-
-
-    <script src="script.js"></script>
 </body>
 </html>
