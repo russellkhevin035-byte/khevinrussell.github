@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khevin Russell - Contact Me</title>
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+<body>
+   <nav>
+    <div class="container">
+
+        <div class="logo">Khevin<span>.dev</span></div>
+
+        <ul>
+            <li><a href="index.html">About Me</a></li>
+            <li><a href="skills.html">Skills</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="contact.html">Contact Me</a></li>
+        </ul>
+
+    </div>
+</nav>
+
+
+    <section class="contact-section">
+    <div class="contact-container">
+
+        <!-- LEFT SIDE -->
+        <div class="contact-left fade-up">
+            <h2 class="contact-title">Get In Touch</h2>
+            <div class="orange-line"></div>
+
+            <h3 class="contact-subtitle">Let’s work together!</h3>
+            <p class="contact-desc">
+                I'm always interested in new opportunities and exciting projects.
+                Whether you have a question or just want to say hi, feel free to reach out!
+            </p>
+
+            <div class="contact-info">
+                <p><i class="fas fa-envelope"></i>russellkhevin035@gmail.com</p>
+                <p><i class="fas fa-phone"></i> +639648787265</p>
+                <p><i class="fas fa-map-marker-alt"></i> Philippines, Angeles City, Pambanga, Amsic Purok 1</p>
+            </div>
+
+            <div class="contact-socials">
+                <footer>
+        <div class="container footer-container">
+
+            <div class="social-links">
+                <a href="https://github.com/russellkhevin035-byte" target="_blank" class="icon-container">
+                    <i class="fa-brands fa-github"></i>
+                </a>
+
+                <a href="https://facebook.com/yourprofile" target="_blank" class="icon-container">
+                    <i class="fa-brands fa-facebook"></i>
+                </a>
+
+                <a href="mailto:russellkhevin035@gmail.com" class="icon-container">
+                    <i class="fa-solid fa-envelope"></i>
+                </a>
+
+                <a href="tel:09648787265" class="icon-container">
+                    <i class="fa-solid fa-phone"></i>
+                </a>
+            </div>
+
+            <p>&copy; 2025 Khevin Russell. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Font Awesome Icons (required for brands) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+            </div>
+        </div>
+
+        <!-- RIGHT SIDE FORM -->
+        <form id="contactForm" class="contact-form">
+    <div class="form-group">
+        <input type="text" name="name" placeholder="Your Name" required>
+    </div>
+
+    <div class="form-group">
+        <input type="email" name="email" placeholder="Your Email" required>
+    </div>
+
+    <div class="form-group">
+        <input type="text" name="subject" placeholder="Subject" required>
+    </div>
+
+    <div class="form-group">
+        <textarea name="message" placeholder="Your Message" required></textarea>
+    </div>
+
+    <button type="submit" class="send-btn">Send Message</button>
+
+    <p id="successMsg" class="success-msg">Thank you for contacting me!</p>
+</form>
+
+
+
+        </div>
+
+    </div>
+</section>
+
+<!-- your contact form HTML goes here -->
+
+<!-- put the script RIGHT BEFORE the closing body tag -->
+<script>
+document.getElementById("contactForm").addEventListener("submit", async function(e) {
+    e.preventDefault(); // STOP redirect
+
+    const form = e.target;
+    const successMsg = document.getElementById("successMsg");
+    const data = new FormData(form);
+
+    // Send form to Formspree manually in background
+    const res = await fetch("https://formspree.io/f/xyzrbkvb", {
+        method: "POST",
+        body: data,
+        headers: { "Accept": "application/json" }
+    });
+
+    if (res.ok) {
+        successMsg.style.display = "block"; // show green message
+        form.reset();
+    }
+});
+</script>
+
+</body>
+</html>
+
+
+    <script src="script.js"></script>
+</body>
+</html>
