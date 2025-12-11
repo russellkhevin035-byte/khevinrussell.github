@@ -6,19 +6,11 @@
     <title>Khevin Russell - Contact Me</title>
     <link rel="stylesheet" href="styles.css">
 
-    <!-- Font Awesome Icons -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <style>
-
-        .rating-display {
-    margin-top: 15px;
-    margin-bottom: 40px !important;  /* <-- This creates space before the footer */
-    font-size: 14px;
-    color: #ccc;
-}
-
-        /* ⭐ STAR RATING STYLES */
+        /* ⭐ STAR RATING */
         .rating-label {
             margin-top: 10px;
             margin-bottom: 6px;
@@ -39,6 +31,7 @@
             cursor: pointer;
             transition: transform .2s ease, color .2s ease;
             color: #555;
+            user-select: none;
         }
 
         .rating span:hover {
@@ -51,11 +44,17 @@
             text-shadow: 0 0 8px rgba(255,165,0,0.7);
         }
 
-        /* ⭐ Firebase rating display */
         .rating-display {
             margin-top: 15px;
-            font-size: 14px;
+            margin-bottom: 40px;
             color: #ccc;
+            font-size: 14px;
+        }
+
+        #successMsg {
+            display: none;
+            margin-top: 10px;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -66,16 +65,14 @@
 <nav>
     <div class="container">
         <div class="logo">Khevin<span>.dev</span></div>
-
         <ul>
             <li><a href="index.html">About Me</a></li>
             <li><a href="skills.html">Skills</a></li>
             <li><a href="projects.html">Projects</a></li>
-            <li><a href="contact.html">Contact Me</a></li>
+            <li><a class="active" href="contact.html">Contact Me</a></li>
         </ul>
     </div>
 </nav>
-
 
 <!-- CONTACT SECTION -->
 <section class="contact-section">
@@ -83,7 +80,7 @@
 
     <!-- LEFT SIDE -->
     <div class="contact-left fade-up">
-        
+
         <h2 class="contact-title">Get In Touch</h2>
         <div class="orange-line"></div>
 
@@ -100,8 +97,7 @@
         </div>
 
         <div class="rating-display">
-            ⭐ <span id="avgRating">0.0</span> / 5  
-            • <span id="totalRatings">0</span> ratings
+            ⭐ <span id="avgRating">0.0</span> / 5 • <span id="totalRatings">0</span> ratings
         </div>
 
         <div class="contact-socials">
@@ -109,15 +105,12 @@
                 <a href="https://github.com/russellkhevin035-byte" target="_blank" class="icon-container">
                     <i class="fa-brands fa-github"></i>
                 </a>
-
-                <a href="https://facebook.com/yourprofile" target="_blank" class="icon-container">
+                <a href="#" target="_blank" class="icon-container">
                     <i class="fa-brands fa-facebook"></i>
                 </a>
-
                 <a href="mailto:russellkhevin035@gmail.com" class="icon-container">
                     <i class="fa-solid fa-envelope"></i>
                 </a>
-
                 <a href="tel:09648787265" class="icon-container">
                     <i class="fa-solid fa-phone"></i>
                 </a>
@@ -126,7 +119,6 @@
             <p>&copy; 2025 Khevin Russell. All rights reserved.</p>
         </div>
     </div>
-
 
     <!-- RIGHT SIDE FORM -->
     <form id="contactForm" class="contact-form">
@@ -146,21 +138,18 @@
         <div class="form-group">
             <textarea name="message" placeholder="Your Message" required></textarea>
         </div>
-        <div class="rating-block">
-    <label class="rating-label">Rate My Portfolio</label>
 
-    <div class="rating" id="ratingStars">
-        <span data-value="5">★</span>
-        <span data-value="4">★</span>
-        <span data-value="3">★</span>
-        <span data-value="2">★</span>
-        <span data-value="1">★</span>
-    </div>
-</div>
+        <!-- ⭐ STAR RATING -->
+        <label class="rating-label">Rate My Portfolio</label>
+        <div class="rating" id="ratingStars">
+            <span data-value="5">★</span>
+            <span data-value="4">★</span>
+            <span data-value="3">★</span>
+            <span data-value="2">★</span>
+            <span data-value="1">★</span>
+        </div>
 
-
-        <!-- Hidden field for Formspree -->
-        <input type="hidden" name="rating" id="ratingInput" value="">
+        <input type="hidden" name="rating" id="ratingInput">
 
         <button type="submit" class="send-btn">Send Message</button>
 
@@ -172,47 +161,33 @@
 </section>
 
 
-
-<!-- ⭐ FIREBASE + STAR SYSTEM + FORMSPREE SCRIPT ⭐ -->
+<!-- ⭐ FIREBASE + FORMSPREE + GMAIL VALIDATION ⭐ -->
 <script type="module">
 
-/* ---------------------------------------------
-     ⭐ FIREBASE CONFIG 
----------------------------------------------- */
+/* FIREBASE SETUP */
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
 import { getFirestore, collection, addDoc, getDocs } 
 from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAN1iAGK4EPWZ82WKiuWTNvZYFxxszJW88",
-  authDomain: "starrating-b6c33.firebaseapp.com",
-  projectId: "starrating-b6c33",
-  storageBucket: "starrating-b6c33.firebasestorage.app",
-  messagingSenderId: "585139648598",
-  appId: "1:585139648598:web:8e483379fed557602623f7",
-  measurementId: "G-ZLYQ2BW6TK"
+    apiKey: "AIzaSyAN1iAGK4EPWZ82WKiuWTNvZYFxxszJW88",
+    authDomain: "starrating-b6c33.firebaseapp.com",
+    projectId: "starrating-b6c33",
+    storageBucket: "starrating-b6c33.firebasestorage.app",
+    messagingSenderId: "585139648598",
+    appId: "1:585139648598:web:8e483379fed557602623f7",
+    measurementId: "G-ZLYQ2BW6TK"
 };
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 
-/* ---------------------------------------------
-     ⭐ STAR RATING CLICK LOGIC
----------------------------------------------- */
-const stars = document.querySelectorAll("#ratingStars span");
+/* ⭐ STAR RATING LOGIC */
 const ratingInput = document.getElementById("ratingInput");
+const stars = document.querySelectorAll("#ratingStars span");
 
 stars.forEach(star => {
-    star.addEventListener("mouseenter", () => {
-        const value = star.dataset.value;
-        stars.forEach(s => s.style.color = (s.dataset.value <= value ? "orange" : "#555"));
-    });
-
-    star.addEventListener("mouseleave", () => {
-        stars.forEach(s => s.style.color = s.classList.contains("active") ? "#ffa347" : "#555");
-    });
-
     star.addEventListener("click", () => {
         const value = star.dataset.value;
         ratingInput.value = value;
@@ -222,68 +197,110 @@ stars.forEach(star => {
             if (s.dataset.value <= value) s.classList.add("active");
         });
     });
-});
 
-
-/* ---------------------------------------------
-     ⭐ SUBMIT FORM → SEND TO FORMSPREE + SAVE RATING TO FIREBASE
----------------------------------------------- */
-document.getElementById("contactForm").addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    const form = e.target;
-    const successMsg = document.getElementById("successMsg");
-    const ratingValue = ratingInput.value;
-
-    const data = new FormData(form);
-
-    // 👉 Send message to Formspree
-    await fetch("https://formspree.io/f/xyzrbkvb", {
-        method: "POST",
-        body: data,
-        headers: { "Accept": "application/json" }
+    star.addEventListener("mouseenter", () => {
+        const value = star.dataset.value;
+        stars.forEach(s => s.style.color = s.dataset.value <= value ? "orange" : "#555");
     });
 
-    // 👉 Save rating to Firebase Firestore
-    if (ratingValue !== "") {
-        await addDoc(collection(db, "ratings"), {
-            rating: parseInt(ratingValue),
-            timestamp: Date.now()
-        });
-    }
-
-    // 🎉 Show success message
-    successMsg.style.display = "block";
-    form.reset();
-
-    // Remove highlighted stars
-    stars.forEach(s => s.classList.remove("active"));
-
-    loadRatingStats();
+    star.addEventListener("mouseleave", () => {
+        stars.forEach(s => s.style.color = s.classList.contains("active") ? "#ffa347" : "#555");
+    });
 });
 
 
-/* ---------------------------------------------
-     ⭐ LOAD AVERAGE RATING
----------------------------------------------- */
+/* ⭐ LOAD AVERAGE RATING */
 async function loadRatingStats() {
     const snapshot = await getDocs(collection(db, "ratings"));
-
-    let total = 0;
-    let count = 0;
+    let total = 0, count = 0;
 
     snapshot.forEach(doc => {
         total += doc.data().rating;
         count++;
     });
 
-    const avg = count ? (total / count).toFixed(1) : "0.0";
-
-    document.getElementById("avgRating").innerText = avg;
+    document.getElementById("avgRating").innerText = count ? (total / count).toFixed(1) : "0.0";
     document.getElementById("totalRatings").innerText = count;
 }
-
 loadRatingStats();
+
+
+/* ⭐ GMAIL VALIDATION */
+function isValidGmail(email) {
+    const pattern = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+    if (!pattern.test(email)) return false;
+
+    const user = email.split("@")[0];
+
+    const banned = [
+        /^test/, /^fake/, /^admin/, /^sample/,
+        /^temp/, /^asdf/, /^qwerty/,
+        /^\d+$/, /(111|000|123)$/
+    ];
+
+    return !banned.some(p => p.test(user));
+}
+
+
+/* ⭐ FORM SUBMISSION */
+const form = document.getElementById("contactForm");
+const successMsg = document.getElementById("successMsg");
+
+form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+    const email = formData.get("email").trim();
+
+    const name = formData.get("name").trim();
+    const subject = formData.get("subject").trim();
+    const message = formData.get("message").trim();
+    const rating = ratingInput.value;
+
+    if (!name || !email || !subject || !message) {
+        successMsg.textContent = "Please fill in all fields.";
+        successMsg.style.color = "red";
+        successMsg.style.display = "block";
+        return;
+    }
+
+    if (!isValidGmail(email)) {
+        successMsg.textContent = "Please enter a valid Gmail address.";
+        successMsg.style.color = "red";
+        successMsg.style.display = "block";
+        return;
+    }
+
+    /* SEND TO FORMSPREE */
+    let res = await fetch("https://formspree.io/f/xyzrbkvb", {
+        method: "POST",
+        body: formData,
+        headers: { "Accept": "application/json" }
+    });
+
+    if (!res.ok) {
+        successMsg.textContent = "Something went wrong. Please try again.";
+        successMsg.style.color = "red";
+        successMsg.style.display = "block";
+        return;
+    }
+
+    /* SAVE RATING */
+    if (rating) {
+        await addDoc(collection(db, "ratings"), {
+            rating: parseInt(rating),
+            timestamp: Date.now()
+        });
+        loadRatingStats();
+    }
+
+    successMsg.textContent = "Message sent successfully!";
+    successMsg.style.color = "lightgreen";
+    successMsg.style.display = "block";
+
+    form.reset();
+    stars.forEach(s => s.classList.remove("active"));
+});
 
 </script>
 
