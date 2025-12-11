@@ -686,6 +686,7 @@ footer{
     font-weight: 600;
     color: #4ade80; /* green */
 }
+
 /* ===================== GLOBAL FADE-UP ANIMATION ===================== */
 
 .fade-up {
@@ -710,4 +711,47 @@ footer{
 .fade-delay-3 { animation-delay: 0.45s; }
 .fade-delay-4 { animation-delay: 0.60s; }
 
+/* FIXED: Rating label + stars aligned properly */
+.rating-label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #ffa347;
+    margin-top: 15px;
+    margin-bottom: 35px;
+    display: block;
+    text-align: left;
+}
 
+/* FIX: Stars stay on the left directly under the text */
+.rating {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 6px;
+    margin: 0;
+    padding: 0;
+
+    /* ⭐ ADD THIS: space below rating */
+    margin-bottom: 35px;  
+}
+
+.rating span {
+    font-size: 30px;
+    cursor: pointer;
+    user-select: none;
+    color: #ccc;
+    transition: color 0.2s ease;
+}
+
+/* active OR hovered stars turn orange */
+.rating span.active,
+.rating span:hover,
+.rating span:hover ~ span {
+    color: #ffa347;
+}
+
+/* guarantee stars remain clickable */
+.rating, .rating span {
+    pointer-events: auto !important;
+}
